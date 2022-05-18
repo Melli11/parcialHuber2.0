@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Eta reduce" #-}
 module Library where
 import PdePreludat
 -- import Data.List (sortBy, head)
@@ -39,13 +37,13 @@ aceptaCualquierViaje _ = True
 aceptaLosViajesMayoresA200 :: CondicionViaje
 aceptaLosViajesMayoresA200  =  (>200).costo
 aceptaViajeDeAcuerdoAlNombreDelCli :: Number -> CondicionViaje
-aceptaViajeDeAcuerdoAlNombreDelCli cantidadLetras = (cantidadLetras == ).length . nombreDelCliente
-
-aceptaViajeSegunZona :: Domicilio -> CondicionViaje
-aceptaViajeSegunZona zona viaje =    zona  /=  domicilioDelCliente viaje
+aceptaViajeDeAcuerdoAlNombreDelCli cantidadLetras = (cantidadLetras >= ).length . nombreDelCliente
 
 aceptaViajeSegunZona' :: Domicilio -> CondicionViaje
-aceptaViajeSegunZona' zona =   (/= zona)  .   domicilioDelCliente
+aceptaViajeSegunZona' zona viaje =    zona  /=  domicilioDelCliente viaje
+
+aceptaViajesQueNOseanDe :: Domicilio -> CondicionViaje
+aceptaViajesQueNOseanDe zona =   (/= zona)  .   domicilioDelCliente
 
 -- (1 punto) Definir las siguientes expresiones:
 -- a. el cliente “Lucas” que vive en Victoria
@@ -61,7 +59,7 @@ clienteZonaComplicada = ("Melli","Olivos")
 -- cliente no viva en “Olivos”.
 
 choferDaniel :: Chofer
-choferDaniel = Chofer "Daniel" 23500 [Viaje (20,04,2017) clienteLucas 150] (aceptaViajeSegunZona "Olivos")
+choferDaniel = Chofer "Daniel" 23500 [Viaje (20,04,2017) clienteLucas 150] (aceptaViajesQueNOseanDe "Olivos")
 
 -- c. la chofer “Alejandra”, su auto tiene 180.000 kms, no hizo viajes y toma
 -- cualquier viaje.
@@ -134,7 +132,7 @@ agregarViajeAUnChofer unViaje unChofer = unChofer {viajesRealizados = unViaje : 
 -- choferDaniel = Chofer "Daniel" 23500 [Viaje (20,04,2017) clienteLucas 150] (aceptaViajeSegunZona "Olivos")
 
 choferJorge :: Chofer
-choferJorge = Chofer "Jorge" 23500 [Viaje (20,04,2017) clienteZonaComplicada 200,Viaje (20,04,2018) clienteZonaComplicada 500, Viaje (20,04,2022) clienteZonaComplicada 300 ] (aceptaViajeSegunZona "Tigre")
+choferJorge = Chofer "Jorge" 23500 [Viaje (20,04,2017) clienteZonaComplicada 200,Viaje (20,04,2018) clienteZonaComplicada 500, Viaje (20,04,2022) clienteZonaComplicada 300 ] (aceptaViajesQueNOseanDe "Tigre")
 
 
 -- choferAlejandra :: Chofer
@@ -143,7 +141,23 @@ choferJorge = Chofer "Jorge" 23500 [Viaje (20,04,2017) clienteZonaComplicada 200
 
 -- viajeDeEjemplo :: Viaje
 -- viajeDeEjemplo = Viaje (20,04,2017) clienteLucas 150
+viajeDeCosto400 :: Viaje
+viajeDeCosto400 = Viaje (20,04,2017) clienteLucas 400
+viajeDeCosto100 :: Viaje
+viajeDeCosto100 = Viaje (20,04,2017) clienteLucas 100
 
+viajeDeLeoDeFlores :: Viaje
+viajeDeLeoDeFlores = Viaje (20,04,2017) clienteLeo 100
+
+viajeDeLucasDeVictoria :: Viaje
+viajeDeLucasDeVictoria = Viaje (20,04,2017) clienteLucas 100
+
+viajeDeJuanDeOlivos :: Viaje
+viajeDeJuanDeOlivos = Viaje (20,04,2017) clienteJuan 100
+
+clienteLeo = ("Leo","Flores")
+
+clienteJuan = ("Juan","Olivos")
 -- clienteLucas :: Cliente
 -- clienteLucas = ("Lucas","Victoria")
 
