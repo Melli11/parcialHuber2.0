@@ -37,7 +37,7 @@ aceptaCualquierViaje _ = True
 aceptaLosViajesMayoresA200 :: CondicionViaje
 aceptaLosViajesMayoresA200  =  (>200).costo
 aceptaViajeDeAcuerdoAlNombreDelCli :: Number -> CondicionViaje
-aceptaViajeDeAcuerdoAlNombreDelCli cantidadLetras = (cantidadLetras >= ).length . nombreDelCliente
+aceptaViajeDeAcuerdoAlNombreDelCli cantidadLetras = (cantidadLetras <= ).length . nombreDelCliente
 
 aceptaViajeSegunZona' :: Domicilio -> CondicionViaje
 aceptaViajeSegunZona' zona viaje =    zona  /=  domicilioDelCliente viaje
@@ -132,7 +132,7 @@ agregarViajeAUnChofer unViaje unChofer = unChofer {viajesRealizados = unViaje : 
 -- choferDaniel = Chofer "Daniel" 23500 [Viaje (20,04,2017) clienteLucas 150] (aceptaViajeSegunZona "Olivos")
 
 choferJorge :: Chofer
-choferJorge = Chofer "Jorge" 23500 [Viaje (20,04,2017) clienteZonaComplicada 200,Viaje (20,04,2018) clienteZonaComplicada 500, Viaje (20,04,2022) clienteZonaComplicada 300 ] (aceptaViajesQueNOseanDe "Tigre")
+choferJorge = Chofer "Jorge" 23500 [Viaje (20,04,2017) clienteZonaComplicada 200,Viaje (20,04,2018) clienteZonaComplicada 500, Viaje (20,04,2022) clienteZonaComplicada 300 ] aceptaLosViajesMayoresA200
 
 
 -- choferAlejandra :: Chofer
