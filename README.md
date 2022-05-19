@@ -1,7 +1,7 @@
 # Parcial Huber 2.0
 
+![Aspose Words f169900e-c223-4f64-be7f-763bf9ea775d 001](https://user-images.githubusercontent.com/54424951/169202059-ba820293-1a80-498a-8a86-51d5c62bd0c5.jpeg)
 
-![](Aspose.Words.f169900e-c223-4f64-be7f-763bf9ea775d.001.jpeg)
 
 Una agencia de remises contrata los más eficientes choferes de los que conoce:
 
